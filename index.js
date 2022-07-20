@@ -23,7 +23,10 @@ wss.on('connection', ws => {
     ws.send('You\'re connected');
 
     ws.on('message', data => {
-        ws.send(data.toString());
+        // ws.send(data.toString());
+        wss.clients.forEach(client => {
+            client.send(data.toString());
+        });
     });
 });
 
