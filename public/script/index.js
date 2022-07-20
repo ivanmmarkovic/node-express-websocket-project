@@ -8,7 +8,7 @@ const btn = document.getElementById('btn');
 
 
 btn.addEventListener('click', handleClick);
-
+textBox.addEventListener('keyup', handleTyping);
 
 ws.addEventListener('message', handleMessage);
 
@@ -20,6 +20,13 @@ function handleMessage(data){
         let p = document.createElement('p');
         p.textContent = message;
         messagesBox.appendChild(p); 
+        return;   
+    }
+    if(message == 'Someone is typing ...'){
+        typingNotification.textContent = 'Someone is typing ...';
+        setTimeout(() => {
+            typingNotification.textContent = ''}
+        , 1000);
         return;   
     }
 
@@ -38,4 +45,8 @@ function handleClick(){
     let p = document.createElement('p');
     p.textContent = 'You : ' + message;
     messagesBox.appendChild(p);
+};
+
+function handleTyping(){
+    ws.send('Someone is typing ...');
 };
