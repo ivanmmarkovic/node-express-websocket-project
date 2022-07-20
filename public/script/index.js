@@ -22,6 +22,8 @@ function handleMessage(data){
 
 function handleClick(){
     let message = textBox.value;
+    if(message == '') return;
+
     ws.send(message);
     textBox.value = '';
 };
