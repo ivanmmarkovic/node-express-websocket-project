@@ -21,6 +21,10 @@ const wss = new WebSocket.Server({
 
 wss.on('connection', ws => {
     ws.send('You\'re connected');
+
+    ws.on('message', data => {
+        ws.send(data.toString());
+    });
 });
 
 server.on('upgrade', function upgrade(request, socket, head) {
