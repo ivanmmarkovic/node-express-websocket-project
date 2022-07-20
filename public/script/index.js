@@ -14,9 +14,17 @@ ws.addEventListener('message', handleMessage);
 
 
 function handleMessage(data){
-    console.log(data);
+    let message = data.data;
+
+    if(message == 'You\'re connected'){
+        let p = document.createElement('p');
+        p.textContent = message;
+        messagesBox.appendChild(p); 
+        return;   
+    }
+
     let p = document.createElement('p');
-    p.textContent = data.data;
+    p.textContent = message;
     messagesBox.appendChild(p);
 };
 
@@ -26,4 +34,8 @@ function handleClick(){
 
     ws.send(message);
     textBox.value = '';
+
+    let p = document.createElement('p');
+    p.textContent = 'You : ' + message;
+    messagesBox.appendChild(p);
 };

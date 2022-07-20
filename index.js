@@ -25,7 +25,9 @@ wss.on('connection', ws => {
     ws.on('message', data => {
         // ws.send(data.toString());
         wss.clients.forEach(client => {
-            client.send(data.toString());
+            if(client != ws && client.readyState == WebSocket.OPEN){
+                client.send(data.toString());
+            }
         });
     });
 });
